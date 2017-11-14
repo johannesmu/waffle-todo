@@ -5,6 +5,7 @@ $main-font-size:16px;
 $full-height: 100vh;
 
 $header-height: 50px;
+
 @mixin header-padding(){
   padding:10px 10px;
   @include box;
