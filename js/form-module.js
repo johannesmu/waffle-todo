@@ -6,14 +6,17 @@ var formmodule = (
     const formelm = document.getElementById('task-form');
     const inputelm = document.getElementById('task-input');
 
-    formelm.addEventListener('submit',(event) => {
-      event.preventDefault();
-    });
-
     formobj.getValue = function() {
       inputval = inputelm.value;
+      formobj.val = inputval;
       return inputval;
     }
-    export formobj;
+
+    formelm.addEventListener('submit',(event) => {
+      event.preventDefault();
+      formobj.getValue();
+      formelm.reset();
+    });
+    return formobj;
   }()
 );
