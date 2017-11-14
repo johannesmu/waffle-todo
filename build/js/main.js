@@ -11,8 +11,9 @@ var formmodule = (
     });
 
     formobj.getValue = function() {
-      
+      inputval = inputelm.value;
       return inputval;
     }
+    export formobj;
   }()
 );
