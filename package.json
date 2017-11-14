@@ -1,0 +1,36 @@
+{
+  "name": "todolistv4",
+  "version": "1.0.0",
+  "description": "todo list using vanilla js",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/johannesmu/waffle-todo.git"
+  },
+  "keywords": [
+    "todo",
+    "list"
+  ],
+  "author": "johannes",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/johannesmu/waffle-todo/issues"
+  },
+  "homepage": "https://github.com/johannesmu/waffle-todo",
+  "devDependencies": {
+    "browser-sync": "^2.18.13",
+    "gulp": "^3.9.1",
+    "gulp-clean-css": "^3.9.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-minify": "0.0.15",
+    "gulp-plumber": "^1.1.0",
+    "gulp-prettify": "^0.5.0",
+    "gulp-pug": "^3.3.0",
+    "gulp-sass": "^3.1.0",
+    "gulp-watch": "^4.3.11",
+    "run-sequence": "^2.2.0"
+  }
+}

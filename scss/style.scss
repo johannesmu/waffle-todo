@@ -1,0 +1,77 @@
+$main-color: hsl(54, 83%, 75%);
+$header-bg: darken($main-color, 10%);
+$main-font: arial,helvetica,sans-serif;
+$main-font-size:16px;
+$full-height: 100vh;
+
+$header-height: 50px;
+@mixin header-padding(){
+  padding:10px 10px;
+  @include box;
+}
+$content-height: calc($fullheight - #{$header-height});
+@mixin box(){
+  box-sizing: border-box;
+}
+
+$footer-height: $header-height;
+$footer-bg: $header-bg;
+
+$input-color:darken($main-color,50%);
+$input-font-size: 20px;
+@mixin row(){
+  display: flex;
+  flex-direction: row;
+}
+@mixin reset(){
+  margin: 0;
+  padding: 0;
+}
+
+@mixin fullheight(){
+  height: 100vh;
+}
+html,body{
+  @include fullheight;
+}
+body{
+  @include reset;
+  font-family:$main-font;
+  font-size: $main-font-size;
+  overflow: hidden;
+}
+header{
+  height: $header-height;
+  background-color:$header-bg;
+  @include header-padding;
+  h1,h2,h3{
+    @include reset;
+  }
+}
+main{
+  height: calc(100vh - (#{$header-height} * 2));
+  overflow:hidden;
+}
+
+footer{
+  height: $footer-height;
+  background-color:$footer-bg;
+  #task-form{
+    @include row;
+    #task-input{
+      padding:10px;
+      font-size: $input-font-size;
+      color: $input-color;
+      border:1px solid $input-color;
+      flex:1;
+    }
+    #task-input:focus{
+      outline:none;
+    }
+    #task-button{
+      width: $header-height + 10;
+      height:48px;
+      font-size: $input-font-size * 0.75;
+    }
+  }
+}
