@@ -14,5 +14,12 @@ html
         input(id='task-input',type='text',placeholder='add task')
         button(type='submit',id='task-button') Add
     script(src='js/main.js')
-          
+    // template for task items with buttons
+    template#task-template
+      li(data-id='',data-name='',data-status='')
+        .task-row
+          p.task-text
+          button(class='task-action',data-function='status')
+          button(class='task-action',data-function='delete')
+      
     

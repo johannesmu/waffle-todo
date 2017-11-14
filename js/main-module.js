@@ -8,11 +8,11 @@ var app = (function(){
       storage.store(task.taskArray);
       uimodule.render();
     }
-    
     form.reset();
   });
-  // window.addEventListener('load',()=>{
-  //   task.taskArray = new Array(storage.read());
-  //   uimodule.render();
-  // });
+  uimodule.bindListener();
+  window.addEventListener('load',() => {
+    task.taskArray = storage.read() ;
+    uimodule.render();
+  });
 }());

@@ -51,7 +51,8 @@ header{
 }
 main{
   height: calc(100vh - (#{$header-height} * 2));
-  overflow:hidden;
+  overflow-x:hidden;
+  overflow-y:auto;
 }
 
 #task-list{
@@ -62,6 +63,9 @@ main{
     padding:10px;
     border-bottom: 1px solid #ccc;
     color:darken($main-color,40%);
+  }
+  li[data-status="1"]{
+    background-color:$main-color;
   }
 }
 

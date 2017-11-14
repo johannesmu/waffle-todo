@@ -11,12 +11,6 @@ var formmodule = (
       formobj.val = inputval;
       return inputval;
     }
-
-    // formelm.addEventListener('submit',(event) => {
-    //   event.preventDefault();
-    //   formobj.getValue();
-    //   formelm.reset();
-    // });
     return formobj;
   }()
 );

@@ -30,7 +30,13 @@ gulp.task('sass', function(){
 });
 
 gulp.task('js', function(){
-  return gulp.src('js/*.js')
+  return gulp.src(['js/classes.js',
+  'js/form-module.js',
+  'js/task-module.js',
+  'js/ui-module.js',
+  'js/storage-module.js',
+  'js/template-module.js',
+  'js/main-module.js'])
   .pipe(concat('main.js'))
   .pipe(browserSync.reload({stream:true}))
   .pipe(gulp.dest(buildpath+'/js'));
