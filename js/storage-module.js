@@ -7,7 +7,7 @@ var storage = ( function(){
   stg.read = function(){
     if(window.localStorage.getItem("data")){
       let data = window.localStorage.getItem("data");
-      return JSON.parse(data);
+      return new Array(JSON.parse(data));
     }
     else{
       return false;

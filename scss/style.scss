@@ -54,6 +54,17 @@ main{
   overflow:hidden;
 }
 
+#task-list{
+  @include reset;
+  list-style:none;
+  li{
+    font-size:20px;
+    padding:10px;
+    border-bottom: 1px solid #ccc;
+    color:darken($main-color,40%);
+  }
+}
+
 footer{
   height: $footer-height;
   background-color:$footer-bg;

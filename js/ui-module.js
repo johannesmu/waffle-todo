@@ -2,7 +2,7 @@ var uimodule = ( function(){
     var module = {};
     
     module.render = function(){
-        let tasks = task.TaskArray;
+        let tasks = task.taskArray;
         const listelem = document.getElementById('task-list');
         listelem.innerHTML = "";
         for(let i=0; i<tasks.length; i++){

@@ -37,16 +37,16 @@ var app = (function(){
     let newtask = formmodule.getValue();
     if(newtask){
       task.add(newtask);
-      storage.store(task.TaskArray);
+      storage.store(task.taskArray);
       uimodule.render();
     }
     
     form.reset();
   });
-  window.addEventListener('load',(event)=>{
-    task.TaskArray = storage.read();
-    uimodule.render();
-  });
+  // window.addEventListener('load',()=>{
+  //   task.taskArray = new Array(storage.read());
+  //   uimodule.render();
+  // });
 }());
 var storage = ( function(){
   var stg = {};
@@ -57,7 +57,7 @@ var storage = ( function(){
   stg.read = function(){
     if(window.localStorage.getItem("data")){
       let data = window.localStorage.getItem("data");
-      return JSON.parse(data);
+      return new Array(JSON.parse(data));
     }
     else{
       return false;
@@ -65,34 +65,21 @@ var storage = ( function(){
   }
   return stg;
 }());
-var task = (function(){
-  var task = {};
-  task.TaskArray = [];
-
-  task.add = function(taskname){
-    //create a new task object and add to array
-    let taskobj = new Task(taskname);
-    task.TaskArray.push(taskobj);
+var task = ( function(){
+  var object = {};
+  object.taskArray = [];
+  object.add = function(taskname){
+    let taskitem = new Task(taskname);
+    object.taskArray.push(taskitem);
   }
-
-  task.remove = function(id){
-    //loop through task array and splice (remove) task with the id
-    let count = TaskArray.length;
-    for(let i=0; i < count; i++){
-      let item = TaskArray[i];
-      if(item.id == id){
-        task.TaskArray.splice(i,1);
-      }
-    }
-  }
-  return task;
-}());
-
+  return object;
+}
+());
 var uimodule = ( function(){
     var module = {};
     
     module.render = function(){
-        let tasks = task.TaskArray;
+        let tasks = task.taskArray;
         const listelem = document.getElementById('task-list');
         listelem.innerHTML = "";
         for(let i=0; i<tasks.length; i++){

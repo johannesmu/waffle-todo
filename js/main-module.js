@@ -5,14 +5,14 @@ var app = (function(){
     let newtask = formmodule.getValue();
     if(newtask){
       task.add(newtask);
-      storage.store(task.TaskArray);
+      storage.store(task.taskArray);
       uimodule.render();
     }
     
     form.reset();
   });
-  window.addEventListener('load',(event)=>{
-    task.TaskArray = storage.read();
-    uimodule.render();
-  });
+  // window.addEventListener('load',()=>{
+  //   task.taskArray = new Array(storage.read());
+  //   uimodule.render();
+  // });
 }());
