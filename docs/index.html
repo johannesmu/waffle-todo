@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>To do List</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+  </head>
+  <body>
+    <header class="header">
+      <h1>To do List</h1>
+    </header>
+    <main>
+      <ul id="task-list"></ul>
+    </main>
+    <footer>
+      <form class="row" id="task-form">
+        <input id="task-input" type="text" placeholder="add task">
+        <button type="submit" id="task-button">Add</button>
+      </form>
+    </footer>
+    <script src="js/main.js"></script>
+    <!-- template for task items with buttons-->
+    <template id="task-template">
+      <li data-id="" data-name="" data-status="">
+        <div class="task-row">
+          <p class="task-text"></p>
+          <div class="buttons">
+            <button class="task-action" data-function="status"></button>
+            <button class="task-action" data-function="delete"></button>
+          </div>
+        </div>
+      </li>
+    </template>
+  </body>
+</html>

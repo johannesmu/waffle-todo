@@ -8,14 +8,7 @@ var uimodule = ( function(){
       let item = tasks[i];
       //create a template
       let listitem = template.create(item);
-      // let li = document.createElement('LI');
-      // li.setAttribute('data-name',item.name);
-      // li.setAttribute('data-id',item.id);
-      // li.setAttribute('data-status',item.status);
-      // let text = document.createTextNode(item.name);
       
-      // li.append(text);
-      // listelem.append(li);
       listelem.appendChild(listitem);
     }
   }
