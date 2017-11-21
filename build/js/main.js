@@ -44,48 +44,39 @@ var task = ( function(){
       }
     }
   }
+  object.delete = function(id){
+    let taskcount = object.taskArray.length;
+    for(let i=0; i<taskcount; i++){
+      let item = object.taskArray[i];
+      if( item.id == id ){
+        object.taskArray.splice(i,1);
+        break;
+        return true;
+      }
+    }
+  }
   return object;
 }
 ());
-var uimodule = ( function(){
-  var module = {};
-  const listelem = document.getElementById('task-list');
-  module.render = function(){
-    let tasks = task.taskArray;
-    listelem.innerHTML = "";
-    for(let i=0; i<tasks.length; i++){
-      let item = tasks[i];
-      let li = document.createElement('LI');
-      li.setAttribute('data-name',item.name);
-      li.setAttribute('data-id',item.id);
-      li.setAttribute('data-status',item.status);
-      let text = document.createTextNode(item.name);
-      li.append(text);
-      listelem.append(li);
-    }
-  }
-  module.bindListener = function() {
-    listelem.addEventListener('click', (event) => {
-      itemid = event.target.getAttribute('data-id');
-      console.log(itemid);
-      task.changeStatus(itemid,1)
-      module.render();
-      storage.store(task.taskArray);
-    });
-  }  
-  return module;
-} () );
-
 var storage = ( function(){
   var stg = {};
   stg.store = function(arr){
     let data = JSON.stringify(arr);
+    stg.data = data;
     window.localStorage.setItem("data",data);
   }
   stg.read = function(){
     if(window.localStorage.getItem("data")){
+      try{
+        if(JSON.parse(localStorage.getItem("data"))){
+          let data = JSON.parse(localStorage.getItem("data"));
+        }
+      }
+      catch(error){
+        console.log("error"+error);
+      }
       let data = window.localStorage.getItem("data");
-      return JSON.parse(data) ;
+      return JSON.parse(data);
     }
     else{
       return false;
@@ -101,14 +92,67 @@ var template = ( function(){
     templateobject.template = tmpl;
   });
   
-  templateobject.load = function(){
+  templateobject.create = function(taskobj){
     //import the content of the template
-    let taskhtml = document.importNode(templateobject.template.content,true);
-    templateobject.html = taskhtml;
+    // let temphtml = templateobject.template.content.querySelector('li');
+    let template = document.importNode(templateobject.template.content,true);
+    let temphtml = template.querySelector('li');
+    //fill the template with data from taskobj
+    temphtml.setAttribute('data-id',taskobj.id);
+    temphtml.setAttribute('data-status',taskobj.status);
+    temphtml.setAttribute('data-name',taskobj.name);
+    temphtml.setAttribute('data-id',taskobj.id);
+    temphtml.querySelector('.task-text').innerText = taskobj.name;
+    temphtml.querySelector('.task-text').setAttribute('data-id',taskobj.id);
+    temphtml.querySelector('.task-row').setAttribute('data-id',taskobj.id);
+    temphtml.querySelector('button[data-function="delete"]').setAttribute('data-id',taskobj.id);
+    temphtml.querySelector('button[data-function="status"]').setAttribute('data-id',taskobj.id);
+    
+    return temphtml;
   }
   
   return templateobject;
 } ());
+var uimodule = ( function(){
+  var module = {};
+  const listelem = document.getElementById('task-list');
+  module.render = function(){
+    let tasks = task.taskArray;
+    listelem.innerHTML = "";
+    for(let i=0; i<tasks.length; i++){
+      let item = tasks[i];
+      //create a template
+      let listitem = template.create(item);
+      // let li = document.createElement('LI');
+      // li.setAttribute('data-name',item.name);
+      // li.setAttribute('data-id',item.id);
+      // li.setAttribute('data-status',item.status);
+      // let text = document.createTextNode(item.name);
+      
+      // li.append(text);
+      // listelem.append(li);
+      listelem.appendChild(listitem);
+    }
+  }
+  module.bindListener = function() {
+    listelem.addEventListener('click', (event) => {
+      //get the id of the task
+      //itemid = event.target.getAttribute('data-id');
+      if(event.target.getAttribute('data-function') == 'status'){
+        itemid = event.target.getAttribute('data-id');
+        task.changeStatus(itemid,1);
+      }
+      if(event.target.getAttribute('data-function') == 'delete'){
+        itemid = event.target.getAttribute('data-id');
+        task.delete(itemid);
+      }
+      module.render();
+      storage.store(task.taskArray);
+    });
+  }  
+  return module;
+} () );
+
 var app = (function(){
   const form = document.getElementById('task-form');
   form.addEventListener('submit',(event) => {
@@ -123,7 +167,10 @@ var app = (function(){
   });
   uimodule.bindListener();
   window.addEventListener('load',() => {
-    task.taskArray = storage.read() ;
+    //check if read returns valid data eg if storage is not empty
+    if(storage.read()){
+      task.taskArray = storage.read() ;
+    }
     uimodule.render();
   });
 }());

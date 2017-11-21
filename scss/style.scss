@@ -60,13 +60,44 @@ main{
   list-style:none;
   li{
     font-size:20px;
-    padding:10px;
+    padding-left:10px;
     border-bottom: 1px solid #ccc;
     color:darken($main-color,40%);
   }
   li[data-status="1"]{
-    background-color:$main-color;
+    background-color:lighten($main-color,5%);
+    text-decoration:line-through;
+    color:darken($main-color,10%);
   }
+  li{
+    .task-row{
+      display:flex;
+      justify-content:space-between;
+      .task-text{
+        word-wrap:break-word;
+        max-width:70vw;
+      }
+      .buttons{
+        width:100px;
+        display:flex;
+        button{
+          width:50%;
+          background-color:transparent;
+          border:solid transparent;
+          background-size:50%;
+          background-repeat:no-repeat;
+          background-position:center;
+        }
+        button[data-function="status"]{
+          background-image:url('../images/check.png');
+        }
+        button[data-function="delete"]{
+          background-image:url('../images/times.png');
+        }
+      }
+    }
+  }
+    
 }
 
 footer{

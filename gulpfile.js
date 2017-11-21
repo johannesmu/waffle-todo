@@ -33,9 +33,9 @@ gulp.task('js', function(){
   return gulp.src(['js/classes.js',
   'js/form-module.js',
   'js/task-module.js',
-  'js/ui-module.js',
   'js/storage-module.js',
   'js/template-module.js',
+  'js/ui-module.js',
   'js/main-module.js'])
   .pipe(concat('main.js'))
   .pipe(browserSync.reload({stream:true}))
@@ -49,8 +49,13 @@ gulp.task('browserSync', function() {
   })
 });
 
+gulp.task('images' , function() {
+  return gulp.src('images/**')
+  .pipe(gulp.dest(buildpath+'/images'));
+});
+
 gulp.task('watch', function(){
-  runsequence('sass','html','js','browserSync');
+  runsequence('sass','html','js','images','browserSync');
   gulp.watch('scss/*.scss', ['sass']);
   gulp.watch('templates/*.pug', ['html']);
   gulp.watch('js/*.js', ['js']);

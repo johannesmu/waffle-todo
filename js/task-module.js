@@ -18,6 +18,17 @@ var task = ( function(){
       }
     }
   }
+  object.delete = function(id){
+    let taskcount = object.taskArray.length;
+    for(let i=0; i<taskcount; i++){
+      let item = object.taskArray[i];
+      if( item.id == id ){
+        object.taskArray.splice(i,1);
+        break;
+        return true;
+      }
+    }
+  }
   return object;
 }
 ());

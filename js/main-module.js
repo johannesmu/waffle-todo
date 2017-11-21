@@ -12,7 +12,10 @@ var app = (function(){
   });
   uimodule.bindListener();
   window.addEventListener('load',() => {
-    task.taskArray = storage.read() ;
+    //check if read returns valid data eg if storage is not empty
+    if(storage.read()){
+      task.taskArray = storage.read() ;
+    }
     uimodule.render();
   });
 }());
