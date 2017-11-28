@@ -6,8 +6,20 @@ html
     link(rel='stylesheet',href='css/style.css')
   body
     header.header
+      button(data-function='settings',class='settings-button',id='settings-button')
+        .stripe
+        .stripe
+        .stripe
       h1 To do List
     main
+      .settings-panel
+        form#settings
+          h3 Sort tasks by
+          .group.row
+            input(id='sort-status',type='radio',name='sort',value='status' checked) 
+            label(for='sort-status') Status
+            input(id='sort-date',type='radio',name='sort',value='date') 
+            label(for='sort-date') Date Added
       ul#task-list
     footer
       form#task-form.row

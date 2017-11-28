@@ -5,6 +5,7 @@ var task = ( function(){
   object.add = function(taskname){
     let taskitem = new Task(taskname);
     object.taskArray.push(taskitem);
+    object.sort();
   }
   
   object.changeStatus = function(id,status){
@@ -17,6 +18,7 @@ var task = ( function(){
         return true;
       }
     }
+    object.sort();
   }
   object.delete = function(id){
     let taskcount = object.taskArray.length;
@@ -27,6 +29,19 @@ var task = ( function(){
         break;
         return true;
       }
+    }
+  }
+  object.sort = function(){
+    if(settings.sort = "status"){
+      //sort array according to its status
+      object.taskArray.sort(function(task1,task2){
+        return parseInt(task1.status) - parseInt(task2.status);
+      });
+    }
+    else if(settings.sort = "date"){
+      object.taskArray.sort(function(task1,task2){
+        return parseInt(task1.id) - parseInt(task2.id);
+      });
     }
   }
   return object;

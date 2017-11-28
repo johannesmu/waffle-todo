@@ -7,9 +7,25 @@
   </head>
   <body>
     <header class="header">
+      <button class="settings-button" data-function="settings" id="settings-button">
+        <div class="stripe"></div>
+        <div class="stripe"></div>
+        <div class="stripe"></div>
+      </button>
       <h1>To do List</h1>
     </header>
     <main>
+      <div class="settings-panel">
+        <form id="settings">
+          <h3>Sort tasks by</h3>
+          <div class="group row">
+            <input id="sort-status" type="radio" name="sort" value="status" checked>
+            <label for="sort-status">Status</label>
+            <input id="sort-date" type="radio" name="sort" value="date">
+            <label for="sort-date">Date Added</label>
+          </div>
+        </form>
+      </div>
       <ul id="task-list"></ul>
     </main>
     <footer>

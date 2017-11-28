@@ -44,15 +44,56 @@ body{
 header{
   height: $header-height;
   background-color:$header-bg;
-  @include header-padding;
+  @include row;
   h1,h2,h3{
     @include reset;
+    font-size:20px;
+     @include header-padding;
+  }
+  .settings-button{
+    width:48px;
+    height:48px;
+    background-color:transparent;
+    border:solid transparent;
+    .stripe{
+      height:2px;
+      margin:8px 0;
+      background-color:darken($main-color,30%);
+    }
+  }
+  .settings-button:focus{
+    outline:none;
+  }
+  .settings-button.open{
+    background-color:darken($main-color,30%);
+    .stripe{
+      background-color:darken($main-color,50%);
+    }
   }
 }
 main{
   height: calc(100vh - (#{$header-height} * 2));
   overflow-x:hidden;
   overflow-y:auto;
+  .settings-panel{
+    position:absolute;
+    left: -100vw;
+    transition:left 1s;
+    top:$header-height;
+    z-index:999;
+    background-color:white;
+    width:80vw;
+    box-shadow:5px 5px 8px rgba(0,0,0,0.5);
+    min-height:calc(100vh - (#{$header-height}));
+    #settings{
+      max-width:80%;
+      margin:0 auto;
+    }
+  }
+  .settings-panel.open{
+    top:$header-height;
+    left:0;
+  }
 }
 
 #task-list{
@@ -65,9 +106,12 @@ main{
     color:darken($main-color,40%);
   }
   li[data-status="1"]{
-    background-color:lighten($main-color,5%);
+    background-color:lighten($main-color,15%);
     text-decoration:line-through;
-    color:darken($main-color,10%);
+    color:darken($main-color,40%);
+    button[data-function="status"]{
+      opacity:0.2;
+    }
   }
   li{
     .task-row{
@@ -80,6 +124,7 @@ main{
       .buttons{
         width:100px;
         display:flex;
+        opacity:0.4;
         button{
           width:50%;
           background-color:transparent;

@@ -36,6 +36,7 @@ gulp.task('js', function(){
   'js/storage-module.js',
   'js/template-module.js',
   'js/ui-module.js',
+  'js/settings-module.js',
   'js/main-module.js'])
   .pipe(concat('main.js'))
   .pipe(browserSync.reload({stream:true}))
